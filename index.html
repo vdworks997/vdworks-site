@@ -3,96 +3,90 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VDWorks • Automação e Sites que reduzem erros e ganham tempo</title>
-  <meta name="description" content="Automatizamos processos, integramos sistemas (ERP/SQL/APIs) e criamos sites e apps. Foco em reduzir erros e tempo gasto — do diagnóstico ao deploy, com logs e métricas." />
-  <meta property="og:title" content="VDWorks — Automação, Sites e Apps" />
+  <title>VDWorks • Automação RPA e App´s que reduzem erros e ganham tempo</title>
+  <meta name="description" content="Automatizamos processos, integramos sistemas (ERP/SQL/APIs) e criamos apps ou Bots. Foco em reduzir erros e tempo — do diagnóstico ao deploy, com logs e métricas." />
+  <meta property="og:title" content="VDWorks — Automação, Bots e Apps" />
   <meta property="og:description" content="Automação de rotinas, integrações de sistemas, sites/landing pages e aplicativos desktop." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#22d3ee" />
+  <meta name="theme-color" content="#0ea5e9" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0a0f1e;--bg2:#0d1226;--card:#111736;--muted:#9fb0cc;--text:#eef3ff;
-      --brand:#22d3ee;--brand2:#60a5fa;--line:#223058;--chip:#0f1731
+      /* Tema claro, limpo (inspirado em sites enterprise) */
+      --bg:#ffffff;--surface:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#475569;
+      --line:#e2e8f0;--brand:#0ea5e9;--brand-strong:#0369a1;--chip:#eef6ff
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(34,211,238,.18), transparent 60%),
-        radial-gradient(900px 500px at 90% 0%, rgba(96,165,250,.16), transparent 60%),
-        linear-gradient(180deg,var(--bg),var(--bg2) 45%,var(--bg));
-    }
+    body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;color:var(--text);background:radial-gradient(1200px 600px at 100% 0%,#f1f5f9 10%,transparent 60%),var(--bg)}
     a{color:inherit;text-decoration:none}
-    .container{max-width:1120px;margin:0 auto;padding:18px 20px}
+    .container{max-width:1200px;margin:0 auto;padding:18px 20px}
 
     /* NAV */
-    .nav{position:sticky;top:0;z-index:40;backdrop-filter:saturate(120%) blur(8px);
-      background:linear-gradient(180deg,rgba(8,12,28,.8),rgba(8,12,28,.55));
-      border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+    .nav{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:10px 0}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
-    .logo{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--brand),var(--brand2));box-shadow:0 8px 24px rgba(34,211,238,.25)}
+    .logo{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),#38bdf8);box-shadow:0 6px 18px rgba(14,165,233,.25)}
     .brand span{opacity:.9}
 
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:14px;font-weight:800
-      ;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#06121b;box-shadow:0 10px 28px rgba(34,211,238,.28);
-      transition:transform .07s ease,filter .15s}
+    .nav-links{display:flex;gap:8px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:12px;font-weight:700;border:1px solid var(--line);background:#0ea5e9;color:#00131f;border-color:transparent;box-shadow:0 8px 20px rgba(14,165,233,.25);transition:transform .07s ease,filter .15s}
     .btn:hover{transform:translateY(-1px);filter:saturate(1.05)}
-    .btn.secondary{background:transparent;color:var(--text);box-shadow:none;border:1px solid #26345e}
+    .btn.secondary{background:#fff;color:var(--text);border:1px solid var(--line);box-shadow:none}
+    .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
 
-    /* LAYOUT */
+    /* SEÇÕES */
     section[hidden]{display:none!important}
-    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;padding:30px 0}
-    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #24345e;background:#0f1837;color:#c9d6ff;border-radius:999px;padding:6px 12px;font-size:12px}
-    h1{font-size:clamp(28px,3.2vw,44px);line-height:1.1;margin:14px 0 10px}
-    .lead{font-size:clamp(16px,1.7vw,19px);color:#b9c8e5;max-width:640px}
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;padding:30px 0}
+    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#f1f5f9;color:#0f172a;border-radius:999px;padding:6px 12px;font-size:12px}
+    h1{font-size:clamp(30px,3.6vw,54px);line-height:1.06;margin:16px 0 12px;letter-spacing:-.3px}
+    .lead{font-size:clamp(16px,1.5vw,18px);color:#334155;max-width:640px}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
     .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .chip{background:var(--chip);border:1px solid #1c2950;border-radius:999px;padding:8px 12px;font-size:13px;color:#bcd1ff}
+    .chip{background:var(--chip);border:1px solid #dbeafe;border-radius:999px;padding:8px 12px;font-size:13px;color:#0c4a6e}
 
-    .card{background:radial-gradient(120% 120% at 0% 0%,rgba(96,165,250,.08),transparent),linear-gradient(180deg,rgba(10,13,32,.96),rgba(9,12,26,.98));
-      border:1px solid rgba(113,131,188,.22);border-radius:18px;padding:18px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
 
     .shop-grid{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
-    .shop-item{border:1px solid #1d2a54;border-radius:16px;background:#0d152f;overflow:hidden}
-    .shop-illus{height:120px;background:linear-gradient(180deg,#0c1a38,#0b132b);display:grid;place-items:center;border-bottom:1px solid #1d2a54}
-    .shop-illus small{color:#9fb0cc}
+    .shop-item{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+    .shop-illus{height:120px;background:linear-gradient(180deg,#f1f5f9,#e2e8f0);display:grid;place-items:center;border-bottom:1px solid var(--line)}
+    .shop-illus small{color:#1e293b}
     .shop-body{padding:14px}
     .shop-body h3{margin:0 0 6px;font-size:18px}
     .list{display:grid;gap:10px;margin:10px 0 0;padding:0}
     .list li{list-style:none;display:flex;gap:10px;align-items:flex-start}
-    .dot{width:8px;height:8px;border-radius:50%;margin-top:6px;background:linear-gradient(45deg,var(--brand),var(--brand2))}
+    .dot{width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--brand)}
 
-    .footer{border-top:1px solid #1d2a54;padding:18px 0;color:#93a8d4;font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:34px}
-    .stack{display:flex;gap:10px;flex-wrap:wrap}
-    .stack span{background:#0f1731;border:1px solid #1d2a54;border-radius:999px;padding:6px 10px}
-
-    /* DEMOS */
     .demo-grid{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
-    .demo{position:relative;border:1px solid #203058;background:#0e1633;border-radius:16px;overflow:hidden}
-    .demo img{display:block;width:100%;height:160px;object-fit:cover;opacity:.95}
-    .demo .tag{position:absolute;top:8px;left:8px;background:#0a1a3a;border:1px solid #29427a;color:#cfe0ff;border-radius:999px;padding:4px 8px;font-size:12px}
-    .demo .caption{padding:10px;color:#cfe0ff;font-size:14px}
+    .demo{position:relative;border:1px solid var(--line);background:#fff;border-radius:14px;overflow:hidden}
+    .demo img{display:block;width:100%;height:160px;object-fit:cover}
+    .demo .tag{position:absolute;top:8px;left:8px;background:#0ea5e9;color:#00131f;border-radius:999px;padding:4px 8px;font-size:12px}
+    .demo .caption{padding:10px;color:#0f172a;font-size:14px}
 
-    /* Levantamento form */
+    /* SOBRE */
+    .about{display:grid;grid-template-columns:320px 1fr;gap:24px;align-items:start}
+    .avatar{width:100%;max-width:320px;border-radius:16px;border:1px solid var(--line);}
+
+    /* FORM */
     form{display:grid;gap:10px}
-    label{font-size:14px;color:#cfe0ff}
-    input,textarea,select{background:#0f1731;border:1px solid #1d2a54;border-radius:12px;padding:12px;color:var(--text);font:inherit}
+    label{font-size:14px;color:#0f172a}
+    input,textarea,select{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--text);font:inherit}
 
-    /* MOBILE */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;gap:22px}
+    .footer{border-top:1px solid var(--line);padding:18px 0;color:#334155;font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:34px}
+    .stack{display:flex;gap:10px;flex-wrap:wrap}
+    .stack span{background:#f1f5f9;border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:#0f172a}
+
+    /* RESPONSIVO: duas experiências sem "custo extra" (mesmo código) */
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr;gap:24px}
+      .about{grid-template-columns:1fr}
       .shop-grid{grid-template-columns:1fr 1fr}
       .demo-grid{grid-template-columns:1fr 1fr}
     }
     @media (max-width:640px){
       .container{padding:14px}
-      .shop-grid{grid-template-columns:1fr}
-      .demo-grid{grid-template-columns:1fr}
+      .shop-grid,.demo-grid{grid-template-columns:1fr}
       .cta-row .btn{flex:1 1 auto;justify-content:center}
     }
 
@@ -103,15 +97,16 @@
 <body>
   <div class="container">
     <nav class="nav" aria-label="Topo do site">
-      <div class="brand">
+      <a class="brand" href="#home" data-route>
         <div class="logo" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 16l4-8 4 8 4-8 4 8" stroke="#051018" stroke-width="2"/>
+            <path d="M4 16l4-8 4 8 4-8 4 8" stroke="#002233" stroke-width="2"/>
           </svg>
         </div>
         <span>VDWorks</span>
-      </div>
-      <div class="cta-row">
+      </a>
+      <div class="nav-links">
+        <a class="btn ghost" href="#sobre" data-route>Quem sou eu</a>
         <a class="btn secondary" href="#levantamento" data-route>Faça o levantamento do seu projeto</a>
         <a class="btn" href="#servicos" data-route>Ver serviços</a>
       </div>
@@ -121,7 +116,7 @@
     <section id="home" data-route="home" class="hero">
       <div>
         <span class="badge">Automação de Processos • Integrações • Sites & Apps</span>
-        <h1>Automatizamos tarefas e criamos <span style="background:linear-gradient(45deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent">sites e aplicativos</span> que rodam sozinhos e reduzem erros.</h1>
+        <h1>Automatizamos tarefas e criamos <span style="color:var(--brand-strong)">sites e aplicativos</span> que rodam sozinhos e reduzem erros.</h1>
         <p class="lead">Integrações com ERPs, bancos de dados e planilhas; bots para atividades repetitivas; landing pages e apps desktop. Do diagnóstico ao deploy, com logs e métricas.</p>
         <div class="cta-row">
           <a class="btn" href="#levantamento" data-route>Faça o levantamento do seu projeto</a>
@@ -163,7 +158,7 @@
                 <h3>Bots de rotina</h3>
                 <ul class="list">
                   <li><span class="dot"></span><div>Automação de telas (Windows)</div></li>
-                  <li><span class="dot"></span><div>Playwright/Selenium onde fizer sentido</div></li>
+                  <li><span class="dot"></span><div>Playwright/Selenium quando for melhor</div></li>
                 </ul>
               </div>
             </div>
@@ -253,7 +248,7 @@
 
       <div class="card" style="margin-top:16px">
         <h2 style="margin:0 0 6px">Demos (dados fictícios)</h2>
-        <p class="lead" style="font-size:15px;color:#9fb0cc;margin:0 0 10px">Substitua as imagens por prints seus; nada sensível é exibido aqui.</p>
+        <p class="lead" style="font-size:15px;margin:0 0 10px">Substitua as imagens por prints seus; nada sensível é exibido aqui.</p>
         <div class="demo-grid" id="demoGrid">
           <!-- Troque os src pelos seus arquivos em /assets/demos/ -->
           <figure class="demo"><span class="tag">Conciliação</span><img src="assets/demos/demo-1.jpg" alt="Demo de conciliação ERP (fictícia)"><figcaption class="caption">Conciliação ERP ↔ Planilha</figcaption></figure>
@@ -261,6 +256,25 @@
           <figure class="demo"><span class="tag">SLA</span><img src="assets/demos/demo-3.jpg" alt="Demo de SLA e KPIs (fictícia)"><figcaption class="caption">Painel de SLA/KPIs</figcaption></figure>
         </div>
         <small class="muted">Observação: apenas exemplos ilustrativos; prints reais ficam sob NDA.</small>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" data-route="sobre" hidden>
+      <div class="card" style="margin-top:14px">
+        <div class="about">
+          <img class="avatar" src="assets/victor.jpg" alt="Foto de Victor Ferreira (substitua por sua foto)">
+          <div>
+            <h2 style="margin:0 0 8px">Quem sou eu</h2>
+            <p class="lead" style="margin:0 0 12px">Sou <strong>Victor Ferreira</strong>. Venho da engenharia civil e atuei em <strong>liderança de logística</strong>, onde me apaixonei por automação e melhoria contínua. Transformei rotinas inteiras com <strong>RPA</strong>, integrações e ferramentas próprias — somando <strong>20.000+ horas economizadas</strong> em operações reais.</p>
+            <p>Hoje ajudo empresas a <strong>reduzir erros</strong>, <strong>acelerar tarefas</strong> e <strong>padronizar processos</strong> com automações, integrações entre ERP/SQL/Sheets/APIs, sites enxutos e aplicativos desktop. Minha entrega vai do <em>diagnóstico</em> ao <em>deploy</em>, com <strong>logs, métricas e handover</strong>.</p>
+            <div class="kpis" style="margin-top:12px">
+              <div class="chip">Foco em resultado</div>
+              <div class="chip">Linguagem simples</div>
+              <div class="chip">Qualidade • Logs • Métricas</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -309,10 +323,10 @@
               </label>
             </div>
             <div class="cta-row">
-              <button class="btn" type="submit">Enviar</button>
-              <a class="btn secondary" href="https://wa.me/5585989467956" target="_blank" rel="noreferrer">Falar no Whats</a>
+              <button class="btn" type="submit">Enviar por e‑mail</button>
+              <a id="whatsBtn" class="btn secondary" href="#">Falar no Whats</a>
             </div>
-            <small class="muted">O envio abre seu app de e‑mail com as respostas preenchidas. Se preferir, copie e cole no Whats.</small>
+            <small class="muted">O envio abre seu app de e‑mail com as respostas preenchidas. O botão do WhatsApp abre uma conversa com a mensagem pronta — no celular ou no desktop.</small>
           </form>
         </div>
         <div class="card">
@@ -337,41 +351,65 @@
   </div>
 
   <!-- Floating WhatsApp -->
-  <div class="floating-wa"><a class="btn" href="https://wa.me/5585989467956" target="_blank" rel="noreferrer" aria-label="Conversar no WhatsApp">WhatsApp</a></div>
+  <div class="floating-wa"><a class="btn" id="floatWA" href="#" target="_blank" rel="noreferrer" aria-label="Conversar no WhatsApp">WhatsApp</a></div>
 
   <script>
+    // Configurações rápidas
+    const EMAIL_TO = 'contato@vdworks.com.br'; // troque quando quiser
+    const WA_NUMBER = '5585989467956'; // em formato internacional, sem +
+
     // Atualiza ano no rodapé
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Hash routing simples (#home, #servicos, #levantamento)
-    const routes = new Set(['home','servicos','levantamento']);
+    // Hash routing simples (#home, #servicos, #sobre, #levantamento)
+    const validRoutes = new Set(['home','servicos','sobre','levantamento']);
     function applyRoute(){
       const hash = (location.hash || '#home').replace('#','');
-      document.querySelectorAll('[data-route]').forEach(el=>{
-        const id = el.getAttribute('data-route') || el.id;
-        const show = id === hash;
-        if(el.tagName.toLowerCase()==='section'){
-          el.hidden = !show;
-        }
+      document.querySelectorAll('section[data-route]').forEach(sec=>{
+        const id = sec.getAttribute('data-route') || sec.id;
+        sec.hidden = id !== hash;
       });
-      // Ajusta estado dos links
-      document.querySelectorAll('[data-route]a').forEach(()=>{});
     }
     window.addEventListener('hashchange', applyRoute);
     window.addEventListener('DOMContentLoaded', applyRoute);
 
-    // Intercepta formulário e monta um mailto com corpo formatado
+    // Form: e‑mail com mailto
     const form = document.getElementById('leadForm');
+    function formDataObject(){
+      if(!form) return {};
+      return Object.fromEntries(new FormData(form).entries());
+    }
+
     if(form){
       form.addEventListener('submit', (e)=>{
         e.preventDefault();
-        const data = Object.fromEntries(new FormData(form).entries());
-        const to = 'contato@vdworks.com.br'; // troque quando quiser
+        const data = formDataObject();
         const subject = `Levantamento de projeto — ${data.nome || ''}`.trim();
         const body = `Nome: ${data.nome}\nTelefone: ${data.telefone}\nE-mail: ${data.email}\n\nDescrição:\n${data.descricao}\n\nSistema: ${data.sistema}\nFrequência: ${data.frequencia}\nObjetivo: ${data.objetivo}`;
-        const url = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const url = `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         window.location.href = url;
       });
+    }
+
+    // WhatsApp com mensagem pré-preenchida (usa dados do formulário se existirem)
+    function buildWhatsMessage(data){
+      const intro = 'Olá, gostaria de transformar a minha empresa por meio de automações e RPAs!';
+      const lines = [intro,'','— Dados do levantamento —',`Nome: ${data.nome||''}`,`Telefone: ${data.telefone||''}`,`E-mail: ${data.email||''}`,`Descrição: ${data.descricao||''}`,`Sistema: ${data.sistema||''}`,`Frequência: ${data.frequencia||''}`,`Objetivo: ${data.objetivo||''}`];
+      return lines.join('\n');
+    }
+    function openWhatsWith(data){
+      const text = buildWhatsMessage(data||{});
+      const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(waUrl, '_blank');
+    }
+
+    const whatsBtn = document.getElementById('whatsBtn');
+    if(whatsBtn){
+      whatsBtn.addEventListener('click',(e)=>{e.preventDefault();openWhatsWith(formDataObject());});
+    }
+    const floatWA = document.getElementById('floatWA');
+    if(floatWA){
+      floatWA.addEventListener('click',(e)=>{e.preventDefault();openWhatsWith({});});
     }
   </script>
 </body>
