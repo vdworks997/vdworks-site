@@ -3,63 +3,53 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>VDWorks • Automação e Sites que reduzem erros e ganham tempo</title>
-  <meta name="description" content="Automatizamos processos, integramos sistemas (ERP/SQL/APIs) e criamos sites e apps. Foco em reduzir erros e tempo — do diagnóstico ao deploy, com logs e métricas.">
 
-  <!-- Segurança no front -->
+  <!-- SEO -->
+  <meta name="description" content="Automatizamos processos, integramos sistemas (ERP/SQL/APIs) e criamos sites e apps. Foco em reduzir erros e tempo — do diagnóstico ao deploy, com logs e métricas." />
+  <meta property="og:title" content="VDWorks — Automação, Sites e Apps" />
+  <meta property="og:description" content="Automação de rotinas, integrações de sistemas, sites/landing pages e aplicativos desktop." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- Segurança no front (CSP com inline liberado para manter o roteamento/hash) -->
   <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self';
-                 img-src 'self' data:;
-                 font-src https://fonts.gstatic.com;
-                 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-                 script-src 'self';
-                 connect-src 'self' https://script.google.com;
-                 frame-ancestors 'none';
-                 base-uri 'self';
-                 form-action 'self' https://script.google.com;">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Permissions-Policy"
-        content="geolocation=(), microphone=(), camera=(), usb=(), payment=(), fullscreen=(self)">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+        content="
+          default-src 'self';
+          script-src 'self' 'unsafe-inline';
+          style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+          font-src 'self' https://fonts.gstatic.com;
+          connect-src 'self' https://script.google.com;
+          img-src 'self' data:;
+          frame-ancestors 'none';
+          base-uri 'self';
+          form-action 'self' https://script.google.com">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
 
-  <meta property="og:title" content="VDWorks — Automação, Sites e Apps">
-  <meta property="og:description" content="Automação de rotinas, integrações de sistemas, sites/landing pages e aplicativos desktop.">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#0ea5e9">
-
+  <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
+      /* Tema claro e profissional */
       --bg:#ffffff;--surface:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#475569;
       --line:#e2e8f0;--brand:#0ea5e9;--brand-strong:#0369a1;--chip:#eef6ff
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;
-      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;
-      color:var(--text);
-      background:radial-gradient(1200px 600px at 100% 0%,#f1f5f9 10%,transparent 60%),var(--bg)
-    }
+    body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;color:var(--text);background:radial-gradient(1200px 600px at 100% 0%,#f1f5f9 10%,transparent 60%),var(--bg)}
     a{color:inherit;text-decoration:none}
     .container{max-width:1200px;margin:0 auto;padding:18px 20px}
 
     /* NAV */
-    .nav{
-      position:sticky;top:0;z-index:40;
-      background:rgba(255,255,255,.92);
-      backdrop-filter:saturate(120%) blur(8px);
-      border-bottom:1px solid var(--line);
-      display:flex;align-items:center;justify-content:space-between;
-      padding:10px 0
-    }
+    .nav{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:10px 0}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
     .logo{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),#38bdf8);box-shadow:0 6px 18px rgba(14,165,233,.25)}
     .brand span{opacity:.9}
+
     .nav-links{display:flex;gap:8px;align-items:center;overflow-x:auto;scrollbar-width:none}
     .nav-links::-webkit-scrollbar{display:none}
     .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;font-weight:700;border:1px solid var(--line);background:#0ea5e9;color:#00131f;border-color:transparent;box-shadow:0 8px 20px rgba(14,165,233,.25);transition:transform .07s ease,filter .15s,background .15s}
@@ -67,7 +57,7 @@
     .btn.secondary{background:#fff;color:var(--text);border:1px solid var(--line);box-shadow:none}
     .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
 
-    /* LAYOUT */
+    /* SEÇÕES */
     section[hidden]{display:none!important}
     .hero{display:grid;grid-template-columns:minmax(360px,1.1fr) minmax(420px,.9fr);gap:40px;align-items:start;padding:30px 0}
     .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#f1f5f9;color:#0f172a;border-radius:999px;padding:6px 12px;font-size:12px}
@@ -76,9 +66,10 @@
     .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
     .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .chip{background:var(--chip);border:1px solid #dbeafe;border-radius:999px;padding:8px 12px;font-size:13px;color:#0c4a6e}
+
     .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
 
-    /* Vitrines */
+    /* GRID das vitrines: garante largura mínima para não cortar textos */
     .shop-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
     .shop-item{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:visible}
     .shop-illus{height:108px;background:linear-gradient(180deg,#f1f5f9,#e2e8f0);display:grid;place-items:center;border-bottom:1px solid var(--line)}
@@ -90,18 +81,17 @@
     .list li div{word-break:break-word;overflow-wrap:anywhere}
     .dot{width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--brand)}
 
-    /* Demos */
     .demo-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .demo{position:relative;border:1px solid var(--line);background:#fff;border-radius:14px;overflow:hidden}
     .demo img{display:block;width:100%;height:160px;object-fit:cover}
     .demo .tag{position:absolute;top:8px;left:8px;background:#0ea5e9;color:#00131f;border-radius:999px;padding:4px 8px;font-size:12px}
     .demo .caption{padding:10px;color:#0f172a;font-size:14px}
 
-    /* Sobre */
+    /* SOBRE */
     .about{display:grid;grid-template-columns:320px 1fr;gap:24px;align-items:start}
     .avatar{width:100%;max-width:320px;border-radius:16px;border:1px solid var(--line)}
 
-    /* Form */
+    /* FORM */
     form{display:grid;gap:10px}
     label{font-size:14px;color:#0f172a}
     input,textarea,select{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--text);font:inherit}
@@ -110,8 +100,11 @@
     .stack{display:flex;gap:10px;flex-wrap:wrap}
     .stack span{background:#f1f5f9;border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:#0f172a}
 
-    /* Responsivo */
-    @media (max-width:1024px){.hero{grid-template-columns:1fr;gap:20px}.about{grid-template-columns:1fr}}
+    /* RESPONSIVO */
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr;gap:20px}
+      .about{grid-template-columns:1fr}
+    }
     @media (max-width:640px){
       .container{padding:14px}
       .nav{padding:8px 0}
@@ -121,7 +114,7 @@
       body{padding-bottom:74px}
     }
 
-    /* WhatsApp: desktop flutuante; mobile em barra */
+    /* WhatsApp: botão flutuante no desktop, barra fixa no mobile */
     .floating-wa{position:fixed;right:16px;bottom:16px;z-index:50}
     .wa-bar{display:none}
     @media (max-width:640px){
@@ -320,50 +313,44 @@
         <div class="card">
           <h2 style="margin:0 0 6px">Explique seu processo (60s)</h2>
           <p class="lead" style="font-size:15px;margin:0 0 12px">Poucas perguntas para entendermos o cenário e iniciarmos seu orçamento.</p>
-
-          <form id="leadForm" autocomplete="off" novalidate>
+          <form id="leadForm">
             <div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <label>Nome
-                <input name="nome" placeholder="Seu nome" maxlength="80" required>
+                <input name="nome" placeholder="Seu nome" required>
               </label>
               <label>Telefone (Whats)
-                <input name="telefone" placeholder="(DDD) 9 0000-0000" maxlength="20" pattern="[\d\s()+-]{8,}" required>
+                <input name="telefone" placeholder="(DDD) 9 0000-0000" required>
               </label>
             </div>
-
             <label>E-mail
-              <input type="email" name="email" placeholder="contato@empresa.com" maxlength="120">
+              <input type="email" name="email" placeholder="contato@empresa.com">
             </label>
-
             <label>O que precisa automatizar/construir?
-              <textarea name="descricao" rows="4" maxlength="1500" placeholder="Ex.: exporto planilha do ERP e envio todo dia; quero automatizar"></textarea>
+              <textarea name="descricao" rows="4" placeholder="Ex.: exporto planilha do ERP e envio todo dia; quero automatizar"></textarea>
             </label>
-
             <div class="grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
               <label>Sistema principal
-                <input name="sistema" placeholder="ERP/Planilha/API" maxlength="40">
+                <input name="sistema" placeholder="ERP/Planilha/API" />
               </label>
               <label>Frequência
                 <select name="frequencia">
                   <option value="">Selecione…</option>
-                  <option>Diária</option><option>Semanal</option><option>Mensal</option><option>Eventual</option>
+                  <option>Diária</option>
+                  <option>Semanal</option>
+                  <option>Mensal</option>
+                  <option>Eventual</option>
                 </select>
               </label>
               <label>Objetivo
                 <select name="objetivo">
                   <option value="">Selecione…</option>
-                  <option>Reduzir tempo</option><option>Reduzir erros</option><option>Padronizar processo</option><option>Dashboard/KPIs</option>
+                  <option>Reduzir tempo</option>
+                  <option>Reduzir erros</option>
+                  <option>Padronizar processo</option>
+                  <option>Dashboard/KPIs</option>
                 </select>
               </label>
             </div>
-
-            <!-- Honeypot anti-spam (não preencher) -->
-            <div style="position:absolute;left:-9999px;top:-9999px">
-              <label>Se você é humano, deixe vazio
-                <input name="site_hp">
-              </label>
-            </div>
-
             <div class="cta-row">
               <button class="btn" type="submit">Enviar</button>
               <a id="whatsBtn" class="btn secondary" href="#">Falar no Whats</a>
@@ -371,7 +358,6 @@
             <small class="muted">Sem depender do cliente de e-mail: salvamos um log (quando configurado) e você também pode abrir o WhatsApp com a mensagem pronta.</small>
           </form>
         </div>
-
         <div class="card">
           <h2 style="margin:0 0 6px">Como funciona</h2>
           <ul class="list" style="margin-top:6px">
@@ -400,16 +386,21 @@
 
   <script>
     // === CONFIG RÁPIDO ===
-    const EMAIL_TO = 'vdworks997@gmail.com'; // fallback (só se o endpoint falhar)
-    const WA_NUMBER = '5585989467956';                      // formato internacional, sem +
-    const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxXvjPYTPykWQFggr21o_RcnHQ3CuKvPmSlrJtaCz93YKPTTDTb5i6EmxElDq6qfSAA/exec';    // URL do Apps Script
-    const TOKEN = 'Pingo@2025$$';                         // deve bater com o Code.gs
-    const SEND_COPY_TO_ME = true;
+    const EMAIL_TO = 'contato@vdworks.com.br'; // e-mail para fallback (mailto)
+    const WA_NUMBER = '5585989467956'; // em formato internacional, sem +
+    const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxudhvtv-nh-fysOgcUwQ-6e1ONeF1ckxObHjEKvPakYbGc7ozCfqaSmBAVObEV_mS9/exec';
+    const SEND_COPY_TO_ME = true; // o endpoint pode enviar e-mail para você (ver exemplo do Apps Script)
 
-    // Atualiza ano
+    // (Opcional) subdomínio mobile
+    const REDIRECT_TO_M_SUBDOMAIN = false;
+    if(REDIRECT_TO_M_SUBDOMAIN && window.innerWidth < 680 && location.hostname === 'vdworks.com.br'){
+      location.href = 'https://m.vdworks.com.br' + location.pathname + location.hash;
+    }
+
+    // Atualiza ano no rodapé
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Roteamento simples por hash
+    // Hash routing (#home, #servicos, #sobre, #levantamento)
     function applyRoute(){
       const hash = (location.hash || '#home').replace('#','');
       document.querySelectorAll('section[data-route]').forEach(sec=>{
@@ -438,6 +429,7 @@
         `Objetivo: ${d.objetivo||''}`
       ].join('\n');
     }
+
     function openWhats(data){
       const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildWhatsText(data))}`;
       window.open(url,'_blank');
@@ -445,9 +437,8 @@
 
     async function postToEndpoint(data){
       if(!FORM_ENDPOINT) return false;
-      if (data.site_hp) return true; // honeypot preenchido => ignora
       try{
-        // text/plain evita preflight CORS no Apps Script
+        // text/plain evita preflight (Apps Script não responde a OPTIONS)
         const resp = await fetch(FORM_ENDPOINT,{
           method:'POST',
           headers:{'Content-Type':'text/plain;charset=utf-8'},
@@ -455,13 +446,11 @@
             source:'vdworks-site',
             timestamp:new Date().toISOString(),
             userAgent:navigator.userAgent,
-            token: TOKEN,
             ...data,
             sendCopy:SEND_COPY_TO_ME
           })
         });
-        // Tenta ler JSON; se não for JSON, considera sucesso se status 2xx
-        try { const j = await resp.clone().json(); if (j && j.ok === true) return true; } catch(e) {}
+        try { const j = await resp.clone().json(); if (j && (j.ok === true || resp.ok)) return true; } catch(e){}
         return resp.ok;
       }catch(err){
         console.warn('Falha ao enviar para endpoint', err);
@@ -476,16 +465,27 @@
         const ok = await postToEndpoint(data);
         if(ok){
           alert('Recebido! Em breve retorno pelo Whats/E-mail.');
-          form.reset();
         }else{
-          // Fallback: abre e-mail local do usuário
+          // Fallback: abre e-mail local do usuário (mailto)
           const subject = `Levantamento de projeto — ${data.nome || ''}`.trim();
-          const body = `Nome: ${data.nome}\nTelefone: ${data.telefone}\nE-mail: ${data.email}\n\nDescrição:\n${data.descricao}\n\nSistema: ${data.sistema}\nFrequência: ${data.frequencia}\nObjetivo: ${data.objetivo}`;
+          const body =
+`Nome: ${data.nome}
+Telefone: ${data.telefone}
+E-mail: ${data.email}
+
+Descrição:
+${data.descricao}
+
+Sistema: ${data.sistema}
+Frequência: ${data.frequencia}
+Objetivo: ${data.objetivo}`;
           const url = `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
           window.location.href = url;
         }
       });
     }
+
+    // WhatsApp com os dados do formulário
     document.getElementById('whatsBtn')?.addEventListener('click',(e)=>{e.preventDefault();openWhats(formObj());});
     document.getElementById('floatWA')?.addEventListener('click',(e)=>{e.preventDefault();openWhats({});});
     document.getElementById('waBarBtn')?.addEventListener('click',(e)=>{e.preventDefault();openWhats(formObj());});
