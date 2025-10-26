@@ -39,7 +39,7 @@
 
     /* SEÇÕES */
     section[hidden]{display:none!important}
-    .hero{display:grid;grid-template-columns:minmax(320px,1.15fr) minmax(360px,.85fr);gap:40px;align-items:start;padding:30px 0}
+    .hero{display:grid;grid-template-columns:minmax(360px,1.1fr) minmax(420px,.9fr);gap:40px;align-items:start;padding:30px 0}
     .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#f1f5f9;color:#0f172a;border-radius:999px;padding:6px 12px;font-size:12px}
     h1{font-size:clamp(30px,3.6vw,56px);line-height:1.06;margin:16px 0 12px;letter-spacing:-.3px}
     .lead{font-size:clamp(16px,1.5vw,18px);color:#334155;max-width:640px}
@@ -49,17 +49,19 @@
 
     .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
 
-    .shop-grid{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
-    .shop-item{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+    /* GRID das vitrines: garante largura mínima para não cortar textos */
+    .shop-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .shop-item{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:visible}
     .shop-illus{height:108px;background:linear-gradient(180deg,#f1f5f9,#e2e8f0);display:grid;place-items:center;border-bottom:1px solid var(--line)}
     .shop-illus small{color:#1e293b}
     .shop-body{padding:14px}
     .shop-body h3{margin:0 0 6px;font-size:18px}
     .list{display:grid;gap:10px;margin:10px 0 0;padding:0}
     .list li{list-style:none;display:flex;gap:10px;align-items:flex-start}
+    .list li div{word-break:break-word;overflow-wrap:anywhere}
     .dot{width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--brand)}
 
-    .demo-grid{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+    .demo-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .demo{position:relative;border:1px solid var(--line);background:#fff;border-radius:14px;overflow:hidden}
     .demo img{display:block;width:100%;height:160px;object-fit:cover}
     .demo .tag{position:absolute;top:8px;left:8px;background:#0ea5e9;color:#00131f;border-radius:999px;padding:4px 8px;font-size:12px}
@@ -82,14 +84,11 @@
     @media (max-width:1024px){
       .hero{grid-template-columns:1fr;gap:20px}
       .about{grid-template-columns:1fr}
-      .shop-grid{grid-template-columns:1fr 1fr}
-      .demo-grid{grid-template-columns:1fr 1fr}
     }
     @media (max-width:640px){
       .container{padding:14px}
       .nav{padding:8px 0}
       .nav .btn{padding:8px 10px;font-weight:600}
-      .shop-grid,.demo-grid{grid-template-columns:1fr}
       .cta-row .btn{flex:1 1 auto;justify-content:center}
       .shop-illus{height:84px}
       body{padding-bottom:74px} /* espaço para a barra do Whats */
@@ -169,7 +168,7 @@
                 <h3>Bots de rotina</h3>
                 <ul class="list">
                   <li><span class="dot"></span><div>Automação de telas (Windows)</div></li>
-                  <li><span class="dot"></span><div>Playwright/Selenium quando for melhor</div></li>
+                  <li><span class="dot"></span><div>Playwright / Selenium (quando fizer sentido)</div></li>
                 </ul>
               </div>
             </div>
@@ -367,12 +366,12 @@
 
   <script>
     // === CONFIG RÁPIDO ===
-    const EMAIL_TO = 'contato@vdworks.com.br'; // e-mail para fallback (mailto)
+    const EMAIL_TO = 'vdworks997@gmail.com'; // e-mail para fallback (mailto)
     const WA_NUMBER = '5585989467956'; // em formato internacional, sem +
-    const FORM_ENDPOINT = ''; // cole aqui a URL do seu endpoint (Apps Script / Vercel / Netlify). Se vazio, usa apenas mailto.
-    const SEND_COPY_TO_ME = true; // o endpoint pode enviar e-mail para você (ver exemplo abaixo)
+    const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxudhvtv-nh-fysOgcUwQ-6e1ONeF1ckxObHjEKvPakYbGc7ozCfqaSmBAVObEV_mS9/exec'; // cole aqui a URL do seu endpoint (Apps Script / Vercel / Netlify)
+    const SEND_COPY_TO_ME = true; // o endpoint pode enviar e-mail para você (ver exemplo do Apps Script)
 
-    // (Opcional) redirecionar para subdomínio mobile — deixe false para usar design responsivo único
+    // (Opcional) subdomínio mobile
     const REDIRECT_TO_M_SUBDOMAIN = false;
     if(REDIRECT_TO_M_SUBDOMAIN && window.innerWidth < 680 && location.hostname === 'vdworks.com.br'){
       location.href = 'https://m.vdworks.com.br' + location.pathname + location.hash;
@@ -421,7 +420,7 @@
       try{
         const resp = await fetch(FORM_ENDPOINT,{
           method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-            source:'vdworks-site', timestamp:new Date().toISOString(), ...data, sendCopy:SEND_COPY_TO_ME
+            source:'vdworks-site', timestamp:new Date().toISOString(), userAgent:navigator.userAgent, ...data, sendCopy:SEND_COPY_TO_ME
           })
         });
         return resp.ok;
@@ -434,12 +433,11 @@
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
         const data = formObj();
-        // 1) Tenta gravar LOG/lead no endpoint (Google Apps Script/Vercel/etc.)
-        const ok = await postToEndpoint(data);
+        const ok = await postToEndpoint(data); // grava no Sheets via Apps Script, se configurado
         if(ok){
           alert('Recebido! Em breve retorno pelo Whats/E‑mail.');
         }else{
-          // 2) Fallback: abre e‑mail local do usuário (mailto)
+          // Fallback: abre e‑mail local do usuário (mailto)
           const subject = `Levantamento de projeto — ${data.nome || ''}`.trim();
           const body = `Nome: ${data.nome}\nTelefone: ${data.telefone}\nE-mail: ${data.email}\n\nDescrição:\n${data.descricao}\n\nSistema: ${data.sistema}\nFrequência: ${data.frequencia}\nObjetivo: ${data.objetivo}`;
           const url = `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
