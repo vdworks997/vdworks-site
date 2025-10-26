@@ -366,9 +366,9 @@
 
   <script>
     // === CONFIG RÁPIDO ===
-    const EMAIL_TO = 'vdworks997@gmail.com'; // e-mail para fallback (mailto)
+    const EMAIL_TO = 'contato@vdworks.com.br'; // e-mail para fallback (mailto)
     const WA_NUMBER = '5585989467956'; // em formato internacional, sem +
-    const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxudhvtv-nh-fysOgcUwQ-6e1ONeF1ckxObHjEKvPakYbGc7ozCfqaSmBAVObEV_mS9/exec'; // cole aqui a URL do seu endpoint (Apps Script / Vercel / Netlify)
+    const FORM_ENDPOINT = ''; // cole aqui a URL do seu endpoint (Apps Script / Vercel / Netlify)
     const SEND_COPY_TO_ME = true; // o endpoint pode enviar e-mail para você (ver exemplo do Apps Script)
 
     // (Opcional) subdomínio mobile
@@ -418,14 +418,20 @@
     async function postToEndpoint(data){
       if(!FORM_ENDPOINT) return false;
       try{
+        // Usar text/plain para evitar preflight CORS (Apps Script não responde a OPTIONS)
         const resp = await fetch(FORM_ENDPOINT,{
-          method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+          method:'POST',
+          headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body: JSON.stringify({
             source:'vdworks-site', timestamp:new Date().toISOString(), userAgent:navigator.userAgent, ...data, sendCopy:SEND_COPY_TO_ME
           })
         });
-        return resp.ok;
+        // Tente ler JSON; se não vier JSON mas status for 200..299, considera OK
+        try { const j = await resp.clone().json(); if (j && (j.ok === true || resp.ok)) return true; } catch(e) {}
+        return resp.ok; // fallback: 2xx
       }catch(err){
-        console.warn('Falha ao enviar para endpoint', err);return false;
+        console.warn('Falha ao enviar para endpoint', err);
+        return false;
       }
     }
 
