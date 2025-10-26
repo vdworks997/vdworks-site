@@ -3,162 +3,376 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VDWorks • Automação com Python/RPA — Sites e Apps que reduzem erros e ganham tempo</title>
-  <meta name="description" content="VDWorks: automação com Python/RPA, integrações ERP/SQL/API, bots desktop (Playwright) e desenvolvimento de sites e aplicativos. Diagnóstico rápido, POC em 5–10 dias, implantação com logs." />
+  <title>VDWorks • Automação e Sites que reduzem erros e ganham tempo</title>
+  <meta name="description" content="Automatizamos processos, integramos sistemas (ERP/SQL/APIs) e criamos sites e apps. Foco em reduzir erros e tempo gasto — do diagnóstico ao deploy, com logs e métricas." />
   <meta property="og:title" content="VDWorks — Automação, Sites e Apps" />
-  <meta property="og:description" content="Automação com Python/RPA, integrações, bots e desenvolvimento de sites e apps. Fale com a VDWorks." />
+  <meta property="og:description" content="Automação de rotinas, integrações de sistemas, sites/landing pages e aplicativos desktop." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#22d3ee" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#0b1020;--card:#121730;--muted:#a3b1c6;--text:#eef3ff;--brand:#22d3ee;--brand2:#60a5fa}
+    :root{
+      --bg:#0a0f1e;--bg2:#0d1226;--card:#111736;--muted:#9fb0cc;--text:#eef3ff;
+      --brand:#22d3ee;--brand2:#60a5fa;--line:#223058;--chip:#0f1731
+    }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;background:linear-gradient(180deg,#0b1020,#0d1326 40%,#0b1020);color:var(--text)}
+    body{
+      margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(34,211,238,.18), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(96,165,250,.16), transparent 60%),
+        linear-gradient(180deg,var(--bg),var(--bg2) 45%,var(--bg));
+    }
     a{color:inherit;text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:24px}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
-    .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
-    .logo-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(45deg,var(--brand),var(--brand2))}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#07121c;font-weight:800;box-shadow:0 10px 30px rgba(34,211,238,.25);transition:transform .08s ease,filter .15s}
+    .container{max-width:1120px;margin:0 auto;padding:18px 20px}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:40;backdrop-filter:saturate(120%) blur(8px);
+      background:linear-gradient(180deg,rgba(8,12,28,.8),rgba(8,12,28,.55));
+      border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+    .logo{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));box-shadow:0 8px 24px rgba(34,211,238,.25)}
+    .brand span{opacity:.9}
+
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:14px;font-weight:800
+      ;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#06121b;box-shadow:0 10px 28px rgba(34,211,238,.28);
+      transition:transform .07s ease,filter .15s}
     .btn:hover{transform:translateY(-1px);filter:saturate(1.05)}
-    .btn.secondary{background:#1a2344;color:var(--text);box-shadow:none;border:1px solid #27305a}
-    .hero{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center;padding:40px 0}
-    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #203058;background:#101937;color:#bcd1ff;border-radius:999px;padding:6px 12px;font-size:12px}
-    h1{font-size:38px;line-height:1.15;margin:14px 0 10px}
-    .lead{font-size:18px;color:var(--muted);max-width:640px}
-    .card{background:radial-gradient(120% 120% at 0% 0%,rgba(96,165,250,.08),transparent),linear-gradient(180deg,rgba(10,13,32,.9),rgba(9,12,26,.95));border:1px solid rgba(113,131,188,.25);border-radius:18px;padding:18px}
-    .grid{display:grid;gap:16px}
-    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-    .section{padding:30px 0}
-    .section h2{font-size:24px;margin:0 0 8px}
-    .muted{color:var(--muted)}
-    .kpis{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
-    .kpi{background:#0f1731;border:1px solid #1d2a54;border-radius:14px;padding:10px 14px}
-    .list{display:grid;gap:12px;margin:12px 0 0;padding:0}
-    .list li{list-style:none;display:flex;gap:10px}
-    .dot{width:8px;height:8px;border-radius:50%;margin-top:7px;background:linear-gradient(45deg,var(--brand),var(--brand2))}
-    .case{border-left:3px solid var(--brand2);padding-left:12px}
-    .footer{border-top:1px solid #1d2a54;padding:18px 0;color:#93a8d4;font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .btn.secondary{background:transparent;color:var(--text);box-shadow:none;border:1px solid #26345e}
+
+    /* LAYOUT */
+    section[hidden]{display:none!important}
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;padding:30px 0}
+    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #24345e;background:#0f1837;color:#c9d6ff;border-radius:999px;padding:6px 12px;font-size:12px}
+    h1{font-size:clamp(28px,3.2vw,44px);line-height:1.1;margin:14px 0 10px}
+    .lead{font-size:clamp(16px,1.7vw,19px);color:#b9c8e5;max-width:640px}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .chip{background:var(--chip);border:1px solid #1c2950;border-radius:999px;padding:8px 12px;font-size:13px;color:#bcd1ff}
+
+    .card{background:radial-gradient(120% 120% at 0% 0%,rgba(96,165,250,.08),transparent),linear-gradient(180deg,rgba(10,13,32,.96),rgba(9,12,26,.98));
+      border:1px solid rgba(113,131,188,.22);border-radius:18px;padding:18px}
+
+    .shop-grid{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+    .shop-item{border:1px solid #1d2a54;border-radius:16px;background:#0d152f;overflow:hidden}
+    .shop-illus{height:120px;background:linear-gradient(180deg,#0c1a38,#0b132b);display:grid;place-items:center;border-bottom:1px solid #1d2a54}
+    .shop-illus small{color:#9fb0cc}
+    .shop-body{padding:14px}
+    .shop-body h3{margin:0 0 6px;font-size:18px}
+    .list{display:grid;gap:10px;margin:10px 0 0;padding:0}
+    .list li{list-style:none;display:flex;gap:10px;align-items:flex-start}
+    .dot{width:8px;height:8px;border-radius:50%;margin-top:6px;background:linear-gradient(45deg,var(--brand),var(--brand2))}
+
+    .footer{border-top:1px solid #1d2a54;padding:18px 0;color:#93a8d4;font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:34px}
     .stack{display:flex;gap:10px;flex-wrap:wrap}
     .stack span{background:#0f1731;border:1px solid #1d2a54;border-radius:999px;padding:6px 10px}
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .illus{border-radius:16px;border:1px solid #27305a;background:linear-gradient(180deg,#0c1a38,#0b132b);min-height:220px;display:grid;place-items:center}
-    .illus small{color:#94a3b8}
-    @media (max-width:960px){.hero{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:1fr}.grid.cols-2{grid-template-columns:1fr}}
+
+    /* DEMOS */
+    .demo-grid{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+    .demo{position:relative;border:1px solid #203058;background:#0e1633;border-radius:16px;overflow:hidden}
+    .demo img{display:block;width:100%;height:160px;object-fit:cover;opacity:.95}
+    .demo .tag{position:absolute;top:8px;left:8px;background:#0a1a3a;border:1px solid #29427a;color:#cfe0ff;border-radius:999px;padding:4px 8px;font-size:12px}
+    .demo .caption{padding:10px;color:#cfe0ff;font-size:14px}
+
+    /* Levantamento form */
     form{display:grid;gap:10px}
-    input,textarea{background:#0f1731;border:1px solid #1d2a54;border-radius:12px;padding:12px;color:var(--text);font:inherit}
-    label{font-size:14px;color:#bcd1ff}
+    label{font-size:14px;color:#cfe0ff}
+    input,textarea,select{background:#0f1731;border:1px solid #1d2a54;border-radius:12px;padding:12px;color:var(--text);font:inherit}
+
+    /* MOBILE */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:22px}
+      .shop-grid{grid-template-columns:1fr 1fr}
+      .demo-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:640px){
+      .container{padding:14px}
+      .shop-grid{grid-template-columns:1fr}
+      .demo-grid{grid-template-columns:1fr}
+      .cta-row .btn{flex:1 1 auto;justify-content:center}
+    }
+
+    /* Floating WhatsApp */
+    .floating-wa{position:fixed;right:16px;bottom:16px;z-index:50}
   </style>
 </head>
 <body>
   <div class="container">
-    <nav class="nav">
-      <div class="logo"><span class="logo-dot"></span> VDWorks</div>
+    <nav class="nav" aria-label="Topo do site">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 16l4-8 4 8 4-8 4 8" stroke="#051018" stroke-width="2"/>
+          </svg>
+        </div>
+        <span>VDWorks</span>
+      </div>
       <div class="cta-row">
-        <!-- TODO: substituir com seu número real no formato internacional -->
-        <a class="btn secondary" href="#contato">Fale comigo</a>
-        <a class="btn" href="https://wa.me/5585989467956" target="_blank" rel="noreferrer">WhatsApp</a>
+        <a class="btn secondary" href="#levantamento" data-route>Faça o levantamento do seu projeto</a>
+        <a class="btn" href="#servicos" data-route>Ver serviços</a>
       </div>
     </nav>
 
-    <header class="hero">
+    <!-- HOME -->
+    <section id="home" data-route="home" class="hero">
       <div>
-        <span class="badge">Automação • Integrações ERP/SQL/API • Sites & Apps • RPA Desktop</span>
-        <h1>Construímos <span style="background:linear-gradient(45deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent">automações, sites e apps</span> que rodam sozinhos e fazem sua operação ganhar tempo.</h1>
-        <p class="lead">Integramos ERP/SQL/planilhas e criamos bots desktop (Playwright), além de sites/landing pages e apps desktop — do diagnóstico ao deploy, com logs e métricas.</p>
+        <span class="badge">Automação de Processos • Integrações • Sites & Apps</span>
+        <h1>Automatizamos tarefas e criamos <span style="background:linear-gradient(45deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent">sites e aplicativos</span> que rodam sozinhos e reduzem erros.</h1>
+        <p class="lead">Integrações com ERPs, bancos de dados e planilhas; bots para atividades repetitivas; landing pages e apps desktop. Do diagnóstico ao deploy, com logs e métricas.</p>
         <div class="cta-row">
-          <a class="btn" href="#contato">Explique seu processo (60s)</a>
-          <a class="btn secondary" href="#servicos">Ver serviços</a>
+          <a class="btn" href="#levantamento" data-route>Faça o levantamento do seu projeto</a>
+          <a class="btn secondary" href="#servicos" data-route>Ver serviços</a>
         </div>
         <div class="kpis">
-          <div class="kpi">⏱️ até -70% no tempo de rotinas</div>
-          <div class="kpi">✅ -80% erros manuais</div>
-          <div class="kpi">🧩 ERP • SQL Server • Sheets • APIs</div>
+          <div class="chip">⏱️ até -70% no tempo de rotina</div>
+          <div class="chip">✅ até -80% de erros manuais</div>
+          <div class="chip">🧩 ERPs • SQL Server • Sheets • APIs</div>
         </div>
       </div>
-      <div class="illus card">
-        <small>Demo com dados fictícios — prints reais sob NDA</small>
-      </div>
-    </header>
-
-    <section id="servicos" class="section">
-      <div class="grid cols-3">
-        <div class="card">
-          <h2>Automação & RPA</h2>
-          <ul class="list">
-            <li><span class="dot"></span><div>Bots desktop (Windows) com Playwright</div></li>
-            <li><span class="dot"></span><div>Integrações ERP/SQL/Sheets/APIs</div></li>
-            <li><span class="dot"></span><div>Relatórios/CSV automatizados (pandas)</div></li>
-            <li><span class="dot"></span><div>Agendamento, logs e alertas</div></li>
-          </ul>
-        </div>
-        <div class="card">
-          <h2>Sites & Landing Pages</h2>
-          <ul class="list">
-            <li><span class="dot"></span><div>Landing 1‑página com SEO básico</div></li>
-            <li><span class="dot"></span><div>Formulários conectados a planilhas/APIs</div></li>
-            <li><span class="dot"></span><div>Hospedagem rápida e segura</div></li>
-            <li><span class="dot"></span><div>Performance mobile-first</div></li>
-          </ul>
-        </div>
-        <div class="card">
-          <h2>Apps Desktop</h2>
-          <ul class="list">
-            <li><span class="dot"></span><div>Interfaces ricas com PySide6</div></li>
-            <li><span class="dot"></span><div>Validações e fluxos internos</div></li>
-            <li><span class="dot"></span><div>Exportações e integrações</div></li>
-            <li><span class="dot"></span><div>Instalador e handover</div></li>
-          </ul>
+      <div class="card">
+        <div class="shop-illus" aria-hidden="true"><small>Demo com dados fictícios</small></div>
+        <div class="shop-body">
+          <div class="shop-grid">
+            <div class="shop-item">
+              <div class="shop-illus"><small>Fluxo de aprovação</small></div>
+              <div class="shop-body">
+                <h3>Validações de pedidos</h3>
+                <ul class="list">
+                  <li><span class="dot"></span><div>Regras de negócio configuráveis</div></li>
+                  <li><span class="dot"></span><div>Relatório automático (CSV/Excel)</div></li>
+                </ul>
+              </div>
+            </div>
+            <div class="shop-item">
+              <div class="shop-illus"><small>Integração</small></div>
+              <div class="shop-body">
+                <h3>Integrações de sistemas</h3>
+                <ul class="list">
+                  <li><span class="dot"></span><div>ERP ⇄ SQL ⇄ Sheets ⇄ API</div></li>
+                  <li><span class="dot"></span><div>Logs e alertas por e‑mail</div></li>
+                </ul>
+              </div>
+            </div>
+            <div class="shop-item">
+              <div class="shop-illus"><small>RPA</small></div>
+              <div class="shop-body">
+                <h3>Bots de rotina</h3>
+                <ul class="list">
+                  <li><span class="dot"></span><div>Automação de telas (Windows)</div></li>
+                  <li><span class="dot"></span><div>Playwright/Selenium onde fizer sentido</div></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="grid cols-2">
-        <div class="card">
-          <h2>Resultados (anonimizados)</h2>
-          <div class="case"><strong>Conciliação ERP</strong>
-            <div class="muted">Empresa de médio porte</div>
-            <div>Automação em Python reduziu ~72% do tempo e eliminou erros de digitação.</div></div>
-          <div class="case" style="margin-top:10px"><strong>TES & Expedição</strong>
-            <div class="muted">Varejo</div>
-            <div>Validações automáticas e UI desktop reduziram retrabalho e agilizaram liberações.</div></div>
-          <div class="case" style="margin-top:10px"><strong>Zendesk/SLA</strong>
-            <div class="muted">Atendimento</div>
-            <div>KPIs e SLA com calendário BR; priorização por responsável.</div></div>
+    <!-- SERVIÇOS -->
+    <section id="servicos" data-route="servicos" hidden>
+      <div class="card" style="margin-top:14px">
+        <h2 style="margin:0 0 10px">Serviços</h2>
+        <div class="shop-grid">
+          <div class="shop-item">
+            <div class="shop-illus" aria-hidden="true"><small>Automação</small></div>
+            <div class="shop-body">
+              <h3>Automação de Rotinas (RPA)</h3>
+              <ul class="list">
+                <li><span class="dot"></span><div>Robôs para tarefas repetitivas</div></li>
+                <li><span class="dot"></span><div>Agendamento, logs e alertas</div></li>
+                <li><span class="dot"></span><div>Relatórios e exportações (CSV/Excel)</div></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="shop-item">
+            <div class="shop-illus" aria-hidden="true"><small>Integração</small></div>
+            <div class="shop-body">
+              <h3>Integração de Sistemas</h3>
+              <ul class="list">
+                <li><span class="dot"></span><div>ERP/SQL/Sheets/APIs, bidirecional</div></li>
+                <li><span class="dot"></span><div>Tratamento de dados e validações</div></li>
+                <li><span class="dot"></span><div>Monitoramento e auditoria</div></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="shop-item">
+            <div class="shop-illus" aria-hidden="true"><small>Sites</small></div>
+            <div class="shop-body">
+              <h3>Sites & Landing Pages</h3>
+              <ul class="list">
+                <li><span class="dot"></span><div>Site de 1 página com SEO básico</div></li>
+                <li><span class="dot"></span><div>Formulários ligados a planilhas/APIs</div></li>
+                <li><span class="dot"></span><div>Hospedagem rápida e segura</div></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="shop-item">
+            <div class="shop-illus" aria-hidden="true"><small>Desktop</small></div>
+            <div class="shop-body">
+              <h3>Aplicativos Desktop</h3>
+              <ul class="list">
+                <li><span class="dot"></span><div>Interfaces ricas (PySide6)</div></li>
+                <li><span class="dot"></span><div>Fluxos internos e validações</div></li>
+                <li><span class="dot"></span><div>Instalador e treinamento</div></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="shop-item">
+            <div class="shop-illus" aria-hidden="true"><small>Dados</small></div>
+            <div class="shop-body">
+              <h3>Relatórios & Dashboards</h3>
+              <ul class="list">
+                <li><span class="dot"></span><div>KPIs e acompanhamento diário</div></li>
+                <li><span class="dot"></span><div>CSV/Excel automatizados</div></li>
+                <li><span class="dot"></span><div>Integração com atendimento (ex.: SLA)</div></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="shop-item">
+            <div class="shop-illus" aria-hidden="true"><small>Qualidade</small></div>
+            <div class="shop-body">
+              <h3>Padrões de Qualidade</h3>
+              <ul class="list">
+                <li><span class="dot"></span><div>Versionamento e logs de execução</div></li>
+                <li><span class="dot"></span><div>Checklists de testes e handover</div></li>
+                <li><span class="dot"></span><div>Documentação do processo</div></li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="card" id="contato">
-          <h2>Conte seu processo (60 segundos)</h2>
-          <p class="muted">Descreva a tarefa repetitiva ou o site/app que precisa. Respondo com uma proposta de automação/MVP.</p>
-          <!-- TODO: substitua o e-mail abaixo pelo seu oficial quando tiver uma caixa @vdworks.com.br -->
-          <form action="mailto:contato@vdworks.com.br" method="post" enctype="text/plain">
-            <label>Nome
-              <input name="nome" placeholder="Seu nome" required>
-            </label>
-            <label>E-mail
-              <input type="email" name="email" placeholder="vdworks997@gmail.com" required>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2 style="margin:0 0 6px">Demos (dados fictícios)</h2>
+        <p class="lead" style="font-size:15px;color:#9fb0cc;margin:0 0 10px">Substitua as imagens por prints seus; nada sensível é exibido aqui.</p>
+        <div class="demo-grid" id="demoGrid">
+          <!-- Troque os src pelos seus arquivos em /assets/demos/ -->
+          <figure class="demo"><span class="tag">Conciliação</span><img src="assets/demos/demo-1.jpg" alt="Demo de conciliação ERP (fictícia)"><figcaption class="caption">Conciliação ERP ↔ Planilha</figcaption></figure>
+          <figure class="demo"><span class="tag">Validação</span><img src="assets/demos/demo-2.jpg" alt="Demo de validação de pedidos (fictícia)"><figcaption class="caption">Validação de pedidos/TES</figcaption></figure>
+          <figure class="demo"><span class="tag">SLA</span><img src="assets/demos/demo-3.jpg" alt="Demo de SLA e KPIs (fictícia)"><figcaption class="caption">Painel de SLA/KPIs</figcaption></figure>
+        </div>
+        <small class="muted">Observação: apenas exemplos ilustrativos; prints reais ficam sob NDA.</small>
+      </div>
+    </section>
+
+    <!-- LEVANTAMENTO -->
+    <section id="levantamento" data-route="levantamento" hidden>
+      <div class="grid" style="gap:16px;margin-top:14px">
+        <div class="card">
+          <h2 style="margin:0 0 6px">Explique seu processo (60s)</h2>
+          <p class="lead" style="font-size:15px;margin:0 0 12px">Poucas perguntas para entendermos o cenário e iniciarmos seu orçamento.</p>
+          <form id="leadForm">
+            <div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <label>Nome
+                <input name="nome" placeholder="Seu nome" required>
+              </label>
+              <label>Telefone (Whats)
+                <input name="telefone" placeholder="(DDD) 9 0000-0000" required>
+              </label>
+            </div>
+            <label>E‑mail
+              <input type="email" name="email" placeholder="contato@empresa.com" required>
             </label>
             <label>O que precisa automatizar/construir?
-              <textarea name="processo" rows="4" placeholder="Ex.: exporto planilha do ERP, filtro e envio por e-mail toda manhã"></textarea>
+              <textarea name="descricao" rows="4" placeholder="Ex.: exporto planilha do ERP e envio todo dia; quero automatizar"></textarea>
             </label>
+            <div class="grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+              <label>Sistema principal
+                <input name="sistema" placeholder="ERP/Planilha/API" />
+              </label>
+              <label>Frequência
+                <select name="frequencia">
+                  <option value="">Selecione…</option>
+                  <option>Diária</option>
+                  <option>Semanal</option>
+                  <option>Mensal</option>
+                  <option>Eventual</option>
+                </select>
+              </label>
+              <label>Objetivo
+                <select name="objetivo">
+                  <option value="">Selecione…</option>
+                  <option>Reduzir tempo</option>
+                  <option>Reduzir erros</option>
+                  <option>Padronizar processo</option>
+                  <option>Dashboard/KPIs</option>
+                </select>
+              </label>
+            </div>
             <div class="cta-row">
               <button class="btn" type="submit">Enviar</button>
               <a class="btn secondary" href="https://wa.me/5585989467956" target="_blank" rel="noreferrer">Falar no Whats</a>
             </div>
+            <small class="muted">O envio abre seu app de e‑mail com as respostas preenchidas. Se preferir, copie e cole no Whats.</small>
           </form>
+        </div>
+        <div class="card">
+          <h2 style="margin:0 0 6px">Como funciona</h2>
+          <ul class="list" style="margin-top:6px">
+            <li><span class="dot"></span><div>Diagnóstico rápido do seu processo</div></li>
+            <li><span class="dot"></span><div>POC em 5–10 dias (quando aplicável)</div></li>
+            <li><span class="dot"></span><div>Implantação com logs, métricas e handover</div></li>
+          </ul>
+          <div class="kpis" style="margin-top:12px">
+            <div class="chip">Fortaleza • CE</div>
+            <div class="chip">Atendimento Brasil</div>
+          </div>
         </div>
       </div>
     </section>
 
     <footer class="footer">
       <div>© <span id="y"></span> VDWorks — Todos os direitos reservados.</div>
-      <div class="stack"><span>Fortaleza • CE</span><span>Brasil</span></div>
+      <div class="stack"><span>Qualidade • Logs • Métricas</span><span>Brasil</span></div>
     </footer>
   </div>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+  <!-- Floating WhatsApp -->
+  <div class="floating-wa"><a class="btn" href="https://wa.me/5585989467956" target="_blank" rel="noreferrer" aria-label="Conversar no WhatsApp">WhatsApp</a></div>
+
+  <script>
+    // Atualiza ano no rodapé
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Hash routing simples (#home, #servicos, #levantamento)
+    const routes = new Set(['home','servicos','levantamento']);
+    function applyRoute(){
+      const hash = (location.hash || '#home').replace('#','');
+      document.querySelectorAll('[data-route]').forEach(el=>{
+        const id = el.getAttribute('data-route') || el.id;
+        const show = id === hash;
+        if(el.tagName.toLowerCase()==='section'){
+          el.hidden = !show;
+        }
+      });
+      // Ajusta estado dos links
+      document.querySelectorAll('[data-route]a').forEach(()=>{});
+    }
+    window.addEventListener('hashchange', applyRoute);
+    window.addEventListener('DOMContentLoaded', applyRoute);
+
+    // Intercepta formulário e monta um mailto com corpo formatado
+    const form = document.getElementById('leadForm');
+    if(form){
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        const to = 'contato@vdworks.com.br'; // troque quando quiser
+        const subject = `Levantamento de projeto — ${data.nome || ''}`.trim();
+        const body = `Nome: ${data.nome}\nTelefone: ${data.telefone}\nE-mail: ${data.email}\n\nDescrição:\n${data.descricao}\n\nSistema: ${data.sistema}\nFrequência: ${data.frequencia}\nObjetivo: ${data.objetivo}`;
+        const url = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = url;
+      });
+    }
+  </script>
 </body>
 </html>
